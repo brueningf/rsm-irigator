@@ -31,7 +31,7 @@ class WebServer:
                 data := {
                     "interval": flash.get "settings/interval" "01:00",
                     "pump_period": flash.get "settings/pump_period" "05:00",
-                    "tank_level": tank-level-value,
+                    "tank_level": tank-level-value == 0,
                     "pump_active": active,
                 }
 

@@ -25,7 +25,7 @@ index data:
                             method: 'POST',
                         }).then(() => {
                             this.tmp_active = true
-                            setTimeout(() => this.tmp_active = false, 10000)
+                            setTimeout(() => this.tmp_active = false, 1000)
                         })
                     },
                     togglePump() {
@@ -55,7 +55,7 @@ index data:
         </script>
     </head>
     <body>
-        <main x-data="irigator()" class="container mx-auto max-w-sm">
+        <main x-data="irigator()" class="container mx-auto max-w-sm p-2">
             <div class="mt-2 p-4 border border-black">
                  <div class="flex items-center justify-between">
                     <span>Nivel de tanque</span>
@@ -66,7 +66,7 @@ index data:
                 <h3 class="font-bold text-sm border-b border-black">Funciones</h3>
                 <div class="grid grid-cols-2 gap-4 my-2">
                     <span>Activar la bomba por el tiempo configurado</span>
-                    <button class="p-5 border border-black shadow" x-on:click="sendTrigger">Accionar bomba (temporal)</button>
+                    <button class="p-5 border border-black shadow" :class="tmp_active ? 'bg-green-200 animate-pulse' : ''" x-on:click="sendTrigger">Accionar bomba (temporal)</button>
                     <span>Activar/Desactivar la bomba</span>    
                     <button class="p-5 border border-black shadow" :class="pump_active ? 'bg-green-300' : 'bg-red-300'" x-text="pump_active ? 'Activado' : 'Desactivado'" x-on:click="togglePump">Accionar bomba</button>
                 </div>

@@ -19,16 +19,16 @@ main:
         while true:
             if not is-tank-full:
                 // send alert
-                buzz beeper --frequency=1600 --ms=(50)
-                buzz beeper --frequency=1600 --ms=(50)
-                buzz beeper --frequency=1600 --ms=(50)
-                buzz beeper --frequency=1600 --ms=(50)
+                12.repeat:
+                    buzz beeper --frequency=1300 --ms=(50)
+                    sleep --ms=200
+
                 print "tank is empty"
-                sleep (Duration --m=5)
+                sleep (Duration --m=1)
                 continue
 
             trigger-pump
-            sleep --ms=10000
+            sleep --ms=5000
 
     led1 := gpio.Pin 27 --output
     led2 := gpio.Pin 26 --output
@@ -44,8 +44,9 @@ main:
     task::
         while true:
             buzz beeper --frequency=1500 --ms=(50)
-            buzz beeper --frequency=1500 --ms=(50)
-            sleep --ms=60000
+            sleep --ms=100
+            buzz beeper --frequency=1400 --ms=(50)
+            sleep --ms=30000
 
 trigger-pump:
     flash := Flash
@@ -68,7 +69,7 @@ trigger-pump:
         print "not pumping until next interval in: $time-to-next-pump"
         return
     pump := gpio.Pin 2 --output
-    pump.set 1
+    pump.set 0
     
     pump-period-ms := (
         Duration --m=(int.parse pump-period[0..2]) --s=(int.parse pump-period[3..5])
@@ -84,7 +85,7 @@ trigger-pump:
         print "deactivating tmp trigger"
 
     print "pump off"
-    pump.set 0
+    pump.set 1
     pump.close
 
 is-tank-full -> bool:
