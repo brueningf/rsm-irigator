@@ -46,7 +46,7 @@ main:
             buzz beeper --frequency=1500 --ms=(50)
             sleep --ms=100
             buzz beeper --frequency=1400 --ms=(50)
-            sleep --ms=30000
+            sleep --ms=600000
 
 trigger-pump:
     flash := Flash
